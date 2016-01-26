@@ -25,45 +25,41 @@
 
 Game.Levels = {
 
-    settings: {
-        width: 8,
-        height: 8
-    },
-
-    /**
-     * Grid.
-     * x, y
-     * 0 = open
-     * 1 = brick
-     * 2 = crate
-     */
-    grid: [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 1],
-        [1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1],
-        [1, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    ],
 
     level1: function () {
 
+        /**
+         * Grid.
+         * x, y
+         * 0 = open
+         * 1 = brick
+         * 2 = crate
+         */
+        var grid = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 1],
+            [1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1],
+            [1, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ];
+
         Game.resetScene();
 
-        var centerX = (this.grid[0].length / 2) - .5;
-        var centerY = (this.grid.length / 2) + .5;
+        var centerX = (grid[0].length / 2) - .5;
+        var centerY = (grid.length / 2) + .5;
 
         var ambientLight = new Game.Element();
-        ambientLight.object = new THREE.AmbientLight( 0x404040 ); // soft white light
+        ambientLight.object = new THREE.AmbientLight( 0x404040 );
         ambientLight.add();
 
         var sunLight = new Game.Element();
-        sunLight.object = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 ); // soft white light
+        sunLight.object = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
         sunLight.object.position.x = centerX;
         sunLight.object.position.y = centerY;
         sunLight.add();
@@ -75,7 +71,7 @@ Game.Levels = {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set( 4, 4 );
 
-        var geometry = new THREE.PlaneGeometry( this.grid[0].length + 11, this.grid.length + 6 );
+        var geometry = new THREE.PlaneGeometry( grid[0].length + 11, grid.length + 6 );
         var material =  new THREE.MeshLambertMaterial( { map: texture } );
         var object = new THREE.Mesh( geometry, material );
         object.position.x = centerX;
@@ -87,21 +83,21 @@ Game.Levels = {
         Game.camera.up = new THREE.Vector3(0,0,1);
         Game.camera.position.x = centerX;
         Game.camera.position.y = centerY-1;
-        Game.camera.position.z = 9;
+        Game.camera.position.z = 8;
 
-        for (var y = 0; y < this.grid.length; y++) {
-            var xRow = this.grid[y];
+        for (var y = 0; y < grid.length; y++) {
+            var xRow = grid[y];
             for (var x = 0; x < xRow.length; x++) {
-                var grid = this.grid[y][x];
-                if (grid == 0) {
+                var tile = grid[y][x];
+                if (tile == 0) {
                     continue;
                 }
-                if (grid == 1) {
+                if (tile == 1) {
 
                     var block = new Game.BlockStone();
 
                 }
-                else if (grid == 2) {
+                else if (tile == 2) {
 
                     var block = new Game.BlockCrate();
 

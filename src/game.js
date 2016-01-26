@@ -6,6 +6,4 @@
  *
  * This file is used automatically include all js files in the build en src.
  */
-Game.init();
-
-Game.Levels.level1();
+Game.init(Game.Levels.level1);

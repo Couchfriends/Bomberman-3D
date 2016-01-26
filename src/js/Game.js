@@ -30,12 +30,21 @@ var Game = {
         }
     },
 
+    assets: [
+        {
+            name: 'walrus',
+            type: 'obj',
+            file: 'assets/players/Walrus.obj',
+            object: {}
+        }
+    ],
+
     /**
      * List with all objects
      */
     elements: [],
 
-    init: function () {
+    init: function (callback) {
 
         var camera = new THREE.PerspectiveCamera(75, this.settings.width / this.settings.height, .1, 500);
         var renderer = new THREE.WebGLRenderer();
@@ -50,6 +59,22 @@ var Game = {
         this.resize();
         this.update();
         window.addEventListener('resize', this.resize.bind(this));
+
+        var manager = new THREE.LoadingManager(callback);
+        for (var i = 0; i < this.assets.length; i++) {
+            var asset = this.assets[i];
+            switch (asset.type) {
+                case 'obj':
+                    var loader = new THREE.OBJLoader( manager );
+                    loader.asset = asset;
+                    loader.load(asset.file, function ( object ) {
+                        this.object = object;
+                    }.bind(asset));
+                break;
+            }
+        }
+
+        //manager.onLoad = Game.Levels.level1;
 
     },
 

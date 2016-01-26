@@ -11,6 +11,7 @@ module.exports = function(grunt) {
                 files: {
                     'build/game.js': [
                         'src/js/utils/three.js',
+                        'src/js/utils/OBJLoader.js',
                         'src/js/Game.js',
                         'src/js/core/Game.Element.js',
                         'src/js/block/Game.Block.js',

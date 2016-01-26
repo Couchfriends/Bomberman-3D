@@ -38,7 +38,7 @@ Game.Element = function () {
      * Three.js (mesh) object
      * @type {{}}
      */
-    this.object = {};
+    this.object;
 
 };
 
