@@ -8,6 +8,4 @@
  */
 Game.init();
 
-var block = new Game.Block();
-block.init();
-block.add();
+Game.Levels.level1();

@@ -14,6 +14,9 @@ module.exports = function(grunt) {
                         'src/js/Game.js',
                         'src/js/core/Game.Element.js',
                         'src/js/block/Game.Block.js',
+                        'src/js/block/Game.BlockCrate.js',
+                        'src/js/block/Game.BlockStone.js',
+                        'src/js/levels/Game.Level.js',
                         'src/game.js'
                     ]
                 }

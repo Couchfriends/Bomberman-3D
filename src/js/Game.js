@@ -38,7 +38,6 @@ var Game = {
     init: function () {
 
         var camera = new THREE.PerspectiveCamera(75, this.settings.width / this.settings.height, .1, 500);
-        camera.position.z = 5;
         var renderer = new THREE.WebGLRenderer();
         var sceneGame = new THREE.Scene();
         this.scenes.game.scene = sceneGame;
@@ -64,6 +63,18 @@ var Game = {
         this.settings.height = window.innerHeight;
         this.renderer.setSize(this.settings.width, this.settings.height, true);
         this.camera.aspect = this.settings.width / this.settings.height;
+        this.camera.updateProjectionMatrix();
+
+    },
+
+    resetScene: function(scene) {
+
+        scene = scene || 'game';
+
+        for (var i = 0; i < this.scenes[scene].objects.length; i++) {
+            var element = this.scenes[scene].objects[i];
+            element.remove();
+        }
 
     },
 
