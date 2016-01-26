@@ -1,5 +1,7 @@
 # project ignores
 node_modules
+!build/index.html
+build/
 
 # jetBrains IDE
 .idea
