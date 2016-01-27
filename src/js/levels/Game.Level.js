@@ -64,6 +64,14 @@ Game.Levels = {
         sunLight.object.position.y = centerY;
         sunLight.add();
 
+        var spotLight = new Game.Element();
+        spotLight.object = new THREE.DirectionalLight( 0xffffff, 1 );
+        spotLight.object.color.setHSL( 0.1, 1, 0.95 );
+        spotLight.object.position.x = centerX;
+        spotLight.object.position.y = centerY;
+        spotLight.object.position.z = 5;
+        spotLight.add();
+
         var floor = new Game.Element();
 
         var texture = THREE.ImageUtils.loadTexture( 'assets/blocks/floor.jpg' );
@@ -84,6 +92,10 @@ Game.Levels = {
         Game.camera.position.x = centerX;
         Game.camera.position.y = centerY-1;
         Game.camera.position.z = 8;
+
+        var player = new Game.Player();
+        player.init();
+        player.add();
 
         for (var y = 0; y < grid.length; y++) {
             var xRow = grid[y];

@@ -30,14 +30,20 @@ var Game = {
         }
     },
 
-    assets: [
-        {
+    assets: {
+        walrus: {
             name: 'walrus',
             type: 'obj',
             file: 'assets/players/Walrus.obj',
             object: {}
+        },
+        walrusTexture: {
+            name: 'walrusTexture',
+            type: 'texture',
+            file: 'assets/players/Walrus.png',
+            object: {}
         }
-    ],
+    },
 
     /**
      * List with all objects
@@ -61,14 +67,21 @@ var Game = {
         window.addEventListener('resize', this.resize.bind(this));
 
         var manager = new THREE.LoadingManager(callback);
-        for (var i = 0; i < this.assets.length; i++) {
-            var asset = this.assets[i];
+        for (var key in this.assets) {
+            var asset = this.assets[key];
             switch (asset.type) {
                 case 'obj':
                     var loader = new THREE.OBJLoader( manager );
-                    loader.asset = asset;
                     loader.load(asset.file, function ( object ) {
                         this.object = object;
+                    }.bind(asset));
+                break;
+                case 'texture':
+                    var loader = new THREE.ImageLoader( manager );
+                    loader.load(asset.file, function ( image ) {
+                        this.object = new THREE.Texture();
+                        this.object.image = image;
+                        this.object.needsUpdate = true;
                     }.bind(asset));
                 break;
             }
